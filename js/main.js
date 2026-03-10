@@ -1,3 +1,8 @@
+// 저장된 테마 적용
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark");
+}
+
 fetch("header.html")
   .then(res => res.text())
   .then(data => {
