@@ -12,6 +12,10 @@
   <script src="./js/main.js" defer></script>
   <!-- Typed.js CDN -->
   <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <!-- AOS Scroll animation -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.0/dist/aos.css" />
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
 </head>
 
 <body>
@@ -49,7 +53,7 @@
   <section class="work" id="work">
     <div class="work-inner">
       <h2>Work</h2>
-      <div class="work-content">
+      <div class="work-content" data-aos="fade-up">
         <div class="work-item" onclick="location.href='./icms2025.html'">
           <div class="caption">
             <h3>2025</h3>
@@ -136,7 +140,7 @@
   <section class="contact" id="contact">
     <div class="contact-inner">
       <h2>Contact</h2>
-      <div class="contact-content">
+      <div class="contact-content" data-aos="zoom-in-up">
         <div class="title">Let's Work Together</div>
         <p>Have a project in mind? Feel free to reach out</p>
         <div><button class="btn-contact copy" title="복사">lullulea0803@gmail.com</button></div>
@@ -158,8 +162,8 @@
       loop: true,
       backDelay: 800, //백스페이스 문자 지우기 전에 딜레이
     });
-
   </script>
+
 </body>
 
 </html>

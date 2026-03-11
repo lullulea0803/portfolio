@@ -2,12 +2,19 @@
 if (localStorage.getItem("theme") === "dark") {
   document.body.classList.add("dark");
 }
+// AOS scroll animation
+AOS.init({
+  duration: 400,
+  offset: 180,
+  easing: 'ease-in', // default easing for AOS animations
+  once: false, // whether animation should happen only once - while scrolling down
+  mirror: true, // whether elements should animate out while scrolling past them
+});
 
 fetch("header.html")
   .then(res => res.text())
   .then(data => {
     document.getElementById("header").innerHTML = data;
-
     // header가 DOM에 생긴 다음 실행
     const toogleMenu = document.querySelector(".btn-menu");
     const header = document.querySelector("header");
@@ -30,7 +37,6 @@ fetch("header.html")
       body.classList.add("dark");
       btnTheme.classList.add("is-light");
     }
-
     if (btnTheme) {
       btnTheme.addEventListener("click", () => {
         btnTheme.classList.toggle("is-light");
@@ -50,7 +56,6 @@ fetch("header.html")
       }
       else {
         document.body.classList.remove('active');
-
       }
     });
     // toast
@@ -58,19 +63,13 @@ fetch("header.html")
     document.querySelectorAll('.copy').forEach(function (el) {
 
       el.addEventListener('click', function () {
-
         navigator.clipboard.writeText(this.innerText);
-
         toast.classList.add('show');
-
         setTimeout(function () {
           toast.classList.remove('show');
         }, 1500);
-
       });
-
     });
-
   });
 
 
