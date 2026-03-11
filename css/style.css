@@ -2,6 +2,7 @@
 :root {
   /*변수명: 값;*/
   --primary: #22c55e;
+  --primaryRgb: 34, 197, 94;
   --secondary: black;
   --positive: yellowgreen;
   --nagative: crimson;
@@ -11,7 +12,6 @@
 
   --btnPrimaryFillColor: #22c55e;
   --btnPrimaryTxtColor: #fff;
-  --btnSecondaryFillColor: rgba(34 197 94 0.3);
   --btnSecondaryTxtColor: #777;
   --btnSecondaryborderColor: #222;
   --btnTertiaryFillColor: #222;
@@ -41,6 +41,7 @@ body {
 ========================= */
 body.dark {
   --primary: #2cd369;
+  --primaryRgb: 44, 211, 105;
   --secondary: black;
   --positive: yellowgreen;
   --nagative: crimson;
@@ -50,7 +51,6 @@ body.dark {
 
   --btnPrimaryFillColor: #2cd369;
   --btnPrimaryTxtColor: #eee;
-  --btnSecondaryFillColor: rgba(34 197 94 0.3);
   --btnSecondaryTxtColor: #777;
   --btnSecondaryborderColor: #777;
   --btnTertiaryFillColor: #777;
@@ -65,9 +65,9 @@ body.dark {
   --gnbBgColor: #333;
   --typingBgColor: #6C6C61;
   --workItemBgSize: 210%;
+  --workItemHoverBgColor: rgba(34, 197, 94, 0.514);
   --iconGototop: url(../images/Icon-gototop-dark.svg);
 }
-
 
 /* =========================
    Header
@@ -101,7 +101,7 @@ nav {
   position: relative;
 }
 
-.gnb li a:before {
+.gnb li a::before {
   content: '';
   background-color: var(--btnPrimaryFillColor);
   position: absolute;
@@ -112,7 +112,7 @@ nav {
   transition: 0.5s;
 }
 
-.gnb li:hover a:before {
+.gnb li:hover a::before {
   width: 100%;
 }
 
@@ -189,7 +189,7 @@ nav {
   position: relative;
 }
 
-.visual:before {
+.visual::before {
   content: '';
   position: absolute;
   background: url(../images/cycle-gradient01.svg) no-repeat;
@@ -202,7 +202,7 @@ nav {
   transition: opacity 0.3s;
 }
 
-.visual:after {
+.visual::after {
   content: '';
   position: absolute;
   background: url(../images/cycle-gradient01.svg) no-repeat;
@@ -226,7 +226,6 @@ nav {
   bottom: 60px;
   left: 50%;
   transform: translateX(-50%);
-  /*border: 2px solid red;*/
 }
 
 .mouse .wheele {
@@ -238,7 +237,7 @@ nav {
   position: relative;
 }
 
-.mouse .wheele:before {
+.mouse .wheele::before {
   content: '';
   position: absolute;
   width: 4px;
@@ -257,8 +256,6 @@ nav {
   display: inline-block;
   padding-top: 16px;
   font-weight: 700;
-
-
 }
 
 @keyframes wheele {
@@ -302,7 +299,6 @@ nav {
   transition: all 1s;
   overflow: hidden;
   position: relative;
-
 }
 
 .work-item:nth-child(1) {
@@ -394,8 +390,6 @@ nav {
   padding-bottom: 20px
 }
 
-
-
 /* =========================
    contact
 ========================= */
@@ -451,6 +445,19 @@ nav {
   top: 22px;
   left: 30px;
   z-index: -1;
+}
+
+.btn-contact::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: rgba(var(--primaryRgb), 0.5) 0px 0px 0px;
+  transition: box-shadow 0.3s ease;
+  z-index: -2;
+}
+
+.btn-contact:hover::after {
+  box-shadow: rgba(var(--primaryRgb), 0.5) 16px 16px 0px;
 }
 
 #copyToast {
@@ -537,7 +544,6 @@ body.active .gototop {
     line-height: 1.8em;
     font-size: 3vw;
   }
-
 }
 
 @media screen and (max-width: 767px) {
@@ -569,7 +575,6 @@ body.active .gototop {
     align-items: center;
     position: absolute;
     top: 100%;
-    /* header 바로 아래 */
     left: 0;
     width: 100%;
     background-color: var(--gnbBgColor);
@@ -590,7 +595,7 @@ body.active .gototop {
     height: 50vh;
   }
 
-  .visual:before {
+  .visual::before {
 
     width: 50vw;
     height: 50vw;
@@ -598,7 +603,7 @@ body.active .gototop {
     left: 10px;
   }
 
-  .visual:after {
+  .visual::after {
 
     width: 70vw;
     height: 70vw;
@@ -635,9 +640,7 @@ body.active .gototop {
   .work-item .caption p {
     line-height: 1.8em;
     font-size: 6vw;
-
   }
-
 
   /* =========================
    Work
@@ -652,7 +655,6 @@ body.active .gototop {
     font-weight: 300;
     padding: 0 0 0 32px;
   }
-
 
   .contact-content .title {
     font-weight: 500;
@@ -684,5 +686,4 @@ body.active .gototop {
     padding: 0 0 40px 32px;
     text-transform: uppercase;
   }
-
 }
