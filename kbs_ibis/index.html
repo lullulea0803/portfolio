@@ -1,0 +1,1082 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KBS TV송출운행</title>
+    <script>
+      //mode전환시 화면깜박임 없애기
+      (function () {
+        var savedTheme = localStorage.getItem("isDarkMode");
+        var prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        var isDark = savedTheme === null ? prefersDark : savedTheme === "true";
+        document.documentElement.setAttribute(
+          "data-theme",
+          isDark ? "dark" : "light",
+        );
+      })();
+    </script>
+    <link rel="stylesheet" href="./style/style.css" />
+    <script src="./js/script.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="sidebar">
+        <div class="logo">
+          <svg class="logo-svg" role="img" aria-label="KBS 방송운행시스템">
+            <use href="#logo-kbs"></use>
+          </svg>
+        </div>
+
+        <nav class="gnb" aria-label="주 메뉴">
+          <ul class="gnb-menu">
+            <li class="gnb-item">
+              <button type="button" class="gnb-depth1">나의메뉴</button>
+
+              <ul class="gnb-depth2">
+                <li>
+                  <a href="#"> 통합소재관리 </a>
+                </li>
+                <li>
+                  <a href="#"> 사용자관리 </a>
+                </li>
+                <li>
+                  <a href="#"> 사용자별 접속현황 </a>
+                </li>
+              </ul>
+            </li>
+            <li class="gnb-item">
+              <button type="button" class="gnb-depth1">운행소재관리</button>
+
+              <ul class="gnb-depth2">
+                <li>
+                  <a href="#"> 예고조회/등록 </a>
+                </li>
+                <li>
+                  <a href="#"> 스포츠조회/등록 </a>
+                </li>
+                <li>
+                  <a href="#"> 스크롤방송신청 </a>
+                </li>
+                <li>
+                  <a href="#"> 필러관리 </a>
+                </li>
+                <li>
+                  <a href="#"> 고정SB관리 </a>
+                </li>
+                <li>
+                  <a href="#"> 통합소재관리 </a>
+                </li>
+                <li>
+                  <a href="#"> CG아이디 일별관리 </a>
+                </li>
+                <li>
+                  <a href="#"> 곧이어/아이디관리 </a>
+                </li>
+                <li>
+                  <a href="#"> CG ID관리 </a>
+                </li>
+              </ul>
+            </li>
+            <li class="gnb-item">
+              <button type="button" class="gnb-depth1">일일운행관리</button>
+
+              <ul class="gnb-depth2">
+                <li>
+                  <a href="#"> 통합소재관리 </a>
+                </li>
+                <li>
+                  <a href="#"> 사용자관리 </a>
+                </li>
+                <li>
+                  <a href="#"> 사용자별 접속현황 </a>
+                </li>
+              </ul>
+            </li>
+            <li class="gnb-item">
+              <button type="button" class="gnb-depth1">공지사항</button>
+
+              <ul class="gnb-depth2">
+                <li>
+                  <a href="#"> 통합소재관리 </a>
+                </li>
+                <li>
+                  <a href="#"> 사용자관리 </a>
+                </li>
+                <li>
+                  <a href="#"> 사용자별 접속현황 </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="container">
+        <header class="page-header">
+          <div class="btn-gnb-wrapper">
+            <button
+              type="button"
+              class="btn-header btn-gnb-close"
+              aria-label="메뉴 닫기"
+            ></button>
+          </div>
+          <div
+            class="mdi-tab-container"
+            role="tablist"
+            aria-label="열려있는 문서 목록"
+          >
+            <button
+              type="button"
+              role="tab"
+              aria-selected="true"
+              class="tab-item"
+            >
+              <span>사용자별 접속현황</span>
+              <span class="btn-close" aria-hidden="true">X</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="true"
+              class="tab-item is-active"
+            >
+              <span>예고조회/등록</span>
+              <span class="btn-close" aria-hidden="true">X</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              class="tab-item label-md"
+            >
+              <span>통합소재관리</span>
+              <span class="btn-close" aria-hidden="true">X</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              class="tab-item label-md"
+            >
+              <span>사용자관리</span>
+              <span class="btn-close" aria-hidden="true">X</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              class="tab-item label-md"
+            >
+              <span>CG아이디 일별관리</span>
+              <span class="btn-close" aria-hidden="true">X</span>
+            </button>
+          </div>
+          <div class="header-utility">
+            <button
+              type="button"
+              class="btn-header btn-utility-dark"
+              aria-label="다크 모드 전환"
+            ></button>
+            <button
+              type="button"
+              class="btn-header btn-utility-notice"
+              aria-label="공지사항"
+            ></button>
+            <button
+              type="button"
+              class="btn-header btn-utility-myinfo"
+              aria-label="내 정보"
+            ></button>
+            <div class="user-layer">
+              <ul>
+                <li>내정보</li>
+                <li>로그아웃</li>
+              </ul>
+            </div>
+          </div>
+        </header>
+
+        <main class="main-content">
+          <section class="title-section">
+            <div class="title-area">
+              <h1>예고조회/등록</h1>
+              <button
+                type="button"
+                class="btn-bookmark"
+                aria-label="즐겨찾기 추가"
+              >
+                *
+              </button>
+            </div>
+            <div class="detail-toggle-wrap">
+              <label id="detail-toggle-label" for="detail-toggle"
+                >상세정보
+                <span class="toggle-text label-xs-bold">ON</span></label
+              >
+              <button
+                type="button"
+                id="detail-toggle"
+                class="btn-detail-toggle is-active"
+                aria-pressed="true"
+                aria-labelledby="detail-toggle-label"
+              >
+                <span class="switch"></span>
+              </button>
+            </div>
+          </section>
+          <section class="search-section">
+            <div class="search-item">
+              <label for="search-channel"
+                >채널<span class="asterisk">*</span></label
+              >
+              <div class="custom-select">
+                <select id="search-channel">
+                  <option value="0">1TV</option>
+                  <option value="1">2TV</option>
+                  <option value="2">1TV</option>
+                  <option value="3">2TV</option>
+                </select>
+              </div>
+            </div>
+            <div class="search-item">
+              <label for="search-region"
+                >지역<span class="asterisk">*</span></label
+              >
+              <div class="custom-select">
+                <select id="search-region">
+                  <option value="0">본사</option>
+                  <option value="1">강원지부</option>
+                  <option value="2">경기지부</option>
+                </select>
+              </div>
+            </div>
+            <div class="search-item2">
+              <label for="search-dept">제작부서</label>
+              <input id="search-dept" type="text" placeholder="입력내용표시" />
+              <div class="input-search-wrap">
+                <input
+                  type="text"
+                  placeholder="부서명검색"
+                  aria-label="부서명검색"
+                  class="input-search"
+                />
+              </div>
+            </div>
+            <div class="search-item2">
+              <label for="search-registrant">등록자</label>
+              <input
+                id="search-registrant"
+                type="text"
+                placeholder="입력내용표시"
+              />
+              <div class="input-search-wrap">
+                <input
+                  type="text"
+                  placeholder="사원명검색"
+                  aria-label="사원명검색"
+                  class="input-search"
+                />
+              </div>
+            </div>
+            <div class="search-item">
+              <label for="search-sponsor">협찬</label>
+              <div class="custom-select">
+                <select id="search-sponsor">
+                  <option value="0">협찬 전체</option>
+                  <option value="1">협찬처1</option>
+                </select>
+              </div>
+            </div>
+            <div class="search-item">
+              <label for="search-title">예고명</label>
+              <input id="search-title" type="text" placeholder="예고명" />
+            </div>
+            <div class="search-item3">
+              <div class="custom-select">
+                <select aria-label="날짜 구분">
+                  <option value="0">날짜구분</option>
+                  <option value="1">등록일</option>
+                </select>
+              </div>
+              <div class="input-date-wrap">
+                <input
+                  type="date"
+                  class="input-date"
+                  value="2026-01-01"
+                  aria-label="시작일"
+                />
+                <span class="custom-calendar-icon"></span>
+              </div>
+              <div class="input-date-wrap">
+                <input
+                  type="date"
+                  class="input-date"
+                  value="2026-01-31"
+                  aria-label="종료일"
+                />
+                <span class="custom-calendar-icon"></span>
+              </div>
+            </div>
+            <div class="search-item2">
+              <label for="search-status">사용여부</label>
+              <div class="custom-select">
+                <select id="search-status">
+                  <option value="0">전체</option>
+                  <option value="1">Audi</option>
+                </select>
+              </div>
+              <div><button type="button" class="btn-fill">검색</button></div>
+            </div>
+          </section>
+          <section class="data-section">
+            <div class="list-area">
+              <div class="list-area-up">
+                <div class="title-wrap">
+                  <div class="title">
+                    <h2 id="list-title-1">예고목록</h2>
+                    <span>총 <label>8800</label> 개</span>
+                  </div>
+                  <div class="button-wrap">
+                    <button type="button" class="btn-outline excel">0</button>
+                    <button type="button" class="btn-outline">신규</button>
+                    <button type="button" class="btn-outline">삭제</button>
+                  </div>
+                </div>
+                <div
+                  class="grid-wrap"
+                  role="table"
+                  aria-labelledby="list-title-1"
+                >
+                  <!-- 헤더 -->
+                  <div class="grid-header" role="row">
+                    <div class="col no" role="columnheader">No</div>
+                    <div class="col full" role="columnheader">예고명</div>
+                    <div class="col half" role="columnheader">
+                      비고(종전 부제)
+                    </div>
+                    <div class="col check" role="columnheader">협찬</div>
+                    <div class="col half" role="columnheader">협찬처</div>
+                    <div class="col half" role="columnheader">약정</div>
+                    <div class="col half" role="columnheader">신청</div>
+                  </div>
+
+                  <div class="grid-body" role="rowgroup">
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">1</div>
+                      <div class="col full" role="cell">동물의 왕국</div>
+                      <div class="col half" role="cell">사용기</div>
+                      <div class="col check" role="cell">
+                        <label class="check-wrap no-text">
+                          <input type="checkbox" checked />
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <div class="col half" role="cell">협찬처내용</div>
+                      <div class="col half" role="cell">0</div>
+                      <div class="col half" role="cell">0</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">2</div>
+                      <div class="col full" role="cell">동물의 왕국</div>
+                      <div class="col half" role="cell">사용기</div>
+                      <div class="col check" role="cell">
+                        <label class="check-wrap no-text">
+                          <input type="checkbox" checked />
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <div class="col half" role="cell">협찬처내용</div>
+                      <div class="col half" role="cell">0</div>
+                      <div class="col half" role="cell">0</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">3</div>
+                      <div class="col full" role="cell">동물의 왕국</div>
+                      <div class="col half" role="cell">사용기</div>
+                      <div class="col check" role="cell">
+                        <label class="check-wrap no-text">
+                          <input type="checkbox" />
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <div class="col half" role="cell">협찬처내용</div>
+                      <div class="col half" role="cell">0</div>
+                      <div class="col half" role="cell">0</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">4</div>
+                      <div class="col full" role="cell">동물의 왕국</div>
+                      <div class="col half" role="cell">사용기</div>
+                      <div class="col check" role="cell">
+                        <label class="check-wrap no-text">
+                          <input type="checkbox" />
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <div class="col half" role="cell">협찬처내용</div>
+                      <div class="col half" role="cell">0</div>
+                      <div class="col half" role="cell">0</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">5</div>
+                      <div class="col full" role="cell">동물의 왕국</div>
+                      <div class="col half" role="cell">사용기</div>
+                      <div class="col check" role="cell">
+                        <label class="check-wrap no-text">
+                          <input type="checkbox" />
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <div class="col half" role="cell">협찬처내용</div>
+                      <div class="col half" role="cell">0</div>
+                      <div class="col half" role="cell">0</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">6</div>
+                      <div class="col full" role="cell">동물의 왕국</div>
+                      <div class="col half" role="cell">사용기</div>
+                      <div class="col check" role="cell">
+                        <label class="check-wrap no-text">
+                          <input type="checkbox" />
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <div class="col half" role="cell">협찬처내용</div>
+                      <div class="col half" role="cell">0</div>
+                      <div class="col half" role="cell">0</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">7</div>
+                      <div class="col full" role="cell">동물의 왕국</div>
+                      <div class="col half" role="cell">사용기</div>
+                      <div class="col check" role="cell">
+                        <label class="check-wrap no-text">
+                          <input type="checkbox" />
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <div class="col half" role="cell">협찬처내용</div>
+                      <div class="col half" role="cell">0</div>
+                      <div class="col half" role="cell">0</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">8</div>
+                      <div class="col full" role="cell">동물의 왕국</div>
+                      <div class="col half" role="cell">사용기</div>
+                      <div class="col check" role="cell">
+                        <label class="check-wrap no-text">
+                          <input type="checkbox" />
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <div class="col half" role="cell">협찬처내용</div>
+                      <div class="col half" role="cell">0</div>
+                      <div class="col half" role="cell">0</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">9</div>
+                      <div class="col full" role="cell">동물의 왕국</div>
+                      <div class="col half" role="cell">사용기</div>
+                      <div class="col check" role="cell">
+                        <label class="check-wrap no-text">
+                          <input type="checkbox" />
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <div class="col half" role="cell">협찬처내용</div>
+                      <div class="col half" role="cell">0</div>
+                      <div class="col half" role="cell">0</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">10</div>
+                      <div class="col full" role="cell">동물의 왕국</div>
+                      <div class="col half" role="cell">사용기</div>
+                      <div class="col check" role="cell">
+                        <label class="check-wrap no-text">
+                          <input type="checkbox" />
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <div class="col half" role="cell">협찬처내용</div>
+                      <div class="col half" role="cell">0</div>
+                      <div class="col half" role="cell">0</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pager-wrap">
+                  <div
+                    class="pagination"
+                    role="navigation"
+                    aria-label="페이지 이동"
+                  >
+                    <button
+                      type="button"
+                      class="page-btn forward"
+                      title="첫 페이지"
+                      aria-label="첫 페이지"
+                      disabled
+                    ></button>
+                    <button
+                      type="button"
+                      class="page-btn prev"
+                      title="이전 페이지"
+                      aria-label="이전 페이지"
+                      disabled
+                    ></button>
+                    <button
+                      type="button"
+                      class="page-btn active"
+                      aria-current="page"
+                    >
+                      1
+                    </button>
+                    <button type="button" class="page-btn">2</button>
+                    <button type="button" class="page-btn">3</button>
+                    <button type="button" class="page-btn">4</button>
+                    <button
+                      type="button"
+                      class="page-btn next"
+                      title="다음 페이지"
+                      aria-label="다음 페이지"
+                    ></button>
+                    <button
+                      type="button"
+                      class="page-btn backward"
+                      title="마지막 페이지"
+                      aria-label="마지막 페이지"
+                    ></button>
+                  </div>
+                  <div class="page-size custom-select">
+                    <select>
+                      <option value="0">100개씩보기</option>
+                      <option value="1">10개씩보기</option>
+                      <option value="2">20개씩보기</option>
+                      <option value="3">50개씩보기</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="list-area-down">
+                <div class="title-wrap">
+                  <div class="title">
+                    <h2 id="list-title-2">예고 회차별조회</h2>
+                    <span>총 <label>56</label> 개</span>
+                  </div>
+                  <div class="button-wrap">
+                    <button type="button" class="btn-outline excel">0</button>
+                    <button type="button" class="btn-outline primary">
+                      방송결과
+                    </button>
+                    <button type="button" class="btn-outline">신규</button>
+                    <button type="button" class="btn-outline">삭제</button>
+                  </div>
+                </div>
+                <div
+                  class="grid-wrap"
+                  role="table"
+                  aria-labelledby="list-title-2"
+                >
+                  <!-- 헤더 -->
+                  <div class="grid-header" role="row">
+                    <div class="col no" role="columnheader">No</div>
+                    <div class="col half" role="columnheader">등록일자</div>
+                    <div class="col full" role="columnheader">부제</div>
+                    <div class="col half" role="columnheader">회차</div>
+                    <div class="col half" role="columnheader">채널</div>
+                    <div class="col half" role="columnheader">본방일시</div>
+                    <div class="col half" role="columnheader">신청</div>
+                    <div class="col half" role="columnheader">운행</div>
+                    <div class="col half" role="columnheader">길이</div>
+                  </div>
+
+                  <div class="grid-body" role="rowgroup">
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">1</div>
+                      <div class="col half center" role="cell">2025.07.18</div>
+                      <div class="col full" role="cell">
+                        워료일저녁의 유익한 즐거움, 우리말 겨루기
+                      </div>
+                      <div class="col half center" role="cell">1052</div>
+                      <div class="col half" role="cell">KBS1TV</div>
+                      <div class="col half center" role="cell">본방일시</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half" role="cell">00:00:39:00</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">2</div>
+                      <div class="col half center" role="cell">2025.07.18</div>
+                      <div class="col full" role="cell">
+                        워료일저녁의 유익한 즐거움, 우리말 겨루기
+                      </div>
+                      <div class="col half center" role="cell">1052</div>
+                      <div class="col half" role="cell">KBS1TV</div>
+                      <div class="col half center" role="cell">본방일시</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half" role="cell">00:00:39:00</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">3</div>
+                      <div class="col half center" role="cell">2025.07.18</div>
+                      <div class="col full" role="cell">
+                        워료일저녁의 유익한 즐거움, 우리말 겨루기
+                      </div>
+                      <div class="col half center" role="cell">1052</div>
+                      <div class="col half" role="cell">KBS1TV</div>
+                      <div class="col half center" role="cell">본방일시</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half" role="cell">00:00:39:00</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">4</div>
+                      <div class="col half center" role="cell">2025.07.18</div>
+                      <div class="col full" role="cell">
+                        워료일저녁의 유익한 즐거움, 우리말 겨루기
+                      </div>
+                      <div class="col half center" role="cell">1052</div>
+                      <div class="col half" role="cell">KBS1TV</div>
+                      <div class="col half center" role="cell">본방일시</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half" role="cell">00:00:39:00</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">5</div>
+                      <div class="col half center" role="cell">2025.07.18</div>
+                      <div class="col full" role="cell">
+                        워료일저녁의 유익한 즐거움, 우리말 겨루기
+                      </div>
+                      <div class="col half center" role="cell">1052</div>
+                      <div class="col half" role="cell">KBS1TV</div>
+                      <div class="col half center" role="cell">본방일시</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half" role="cell">00:00:39:00</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">6</div>
+                      <div class="col half center" role="cell">2025.07.18</div>
+                      <div class="col full" role="cell">
+                        워료일저녁의 유익한 즐거움, 우리말 겨루기
+                      </div>
+                      <div class="col half center" role="cell">1052</div>
+                      <div class="col half" role="cell">KBS1TV</div>
+                      <div class="col half center" role="cell">본방일시</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half" role="cell">00:00:39:00</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">7</div>
+                      <div class="col half center" role="cell">2025.07.18</div>
+                      <div class="col full" role="cell">
+                        워료일저녁의 유익한 즐거움, 우리말 겨루기
+                      </div>
+                      <div class="col half center" role="cell">1052</div>
+                      <div class="col half" role="cell">KBS1TV</div>
+                      <div class="col half center" role="cell">본방일시</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half" role="cell">00:00:39:00</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">8</div>
+                      <div class="col half center" role="cell">2025.07.18</div>
+                      <div class="col full" role="cell">
+                        워료일저녁의 유익한 즐거움, 우리말 겨루기
+                      </div>
+                      <div class="col half center" role="cell">1052</div>
+                      <div class="col half" role="cell">KBS1TV</div>
+                      <div class="col half center" role="cell">본방일시</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half" role="cell">00:00:39:00</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">9</div>
+                      <div class="col half center" role="cell">2025.07.18</div>
+                      <div class="col full" role="cell">
+                        워료일저녁의 유익한 즐거움, 우리말 겨루기
+                      </div>
+                      <div class="col half center" role="cell">1052</div>
+                      <div class="col half" role="cell">KBS1TV</div>
+                      <div class="col half center" role="cell">본방일시</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half" role="cell">00:00:39:00</div>
+                    </div>
+                    <div class="grid-row" role="row">
+                      <div class="col no" role="cell">10</div>
+                      <div class="col half center" role="cell">2025.07.18</div>
+                      <div class="col full" role="cell">
+                        워료일저녁의 유익한 즐거움, 우리말 겨루기
+                      </div>
+                      <div class="col half center" role="cell">1052</div>
+                      <div class="col half" role="cell">KBS1TV</div>
+                      <div class="col half center" role="cell">본방일시</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half center" role="cell">0</div>
+                      <div class="col half" role="cell">00:00:39:00</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="detail-area">
+              <div class="tab-container">
+                <div
+                  class="tab-header"
+                  role="tablist"
+                  aria-label="예고 상세 탭"
+                >
+                  <button
+                    type="button"
+                    role="tab"
+                    id="tab1-btn"
+                    aria-selected="true"
+                    aria-controls="tab1"
+                    class="tab-btn active"
+                    data-target="tab1"
+                  >
+                    예고소재 대표상세
+                  </button>
+                  <button
+                    type="button"
+                    role="tab"
+                    id="tab2-btn"
+                    aria-selected="false"
+                    aria-controls="tab2"
+                    class="tab-btn"
+                    data-target="tab2"
+                  >
+                    예고회차별 정보
+                  </button>
+
+                  <div class="tab-btn-wrap">
+                    <button type="button" class="btn-outline">저장</button>
+                    <button type="button" class="btn-outline">취소</button>
+                  </div>
+                </div>
+
+                <div class="tab-body">
+                  <div
+                    id="tab1"
+                    role="tabpanel"
+                    aria-labelledby="tab1-btn"
+                    class="tab-content active"
+                  >
+                    <div class="detail-item">
+                      <label for="detail-channel"
+                        >채널<span class="asterisk">*</span></label
+                      >
+                      <input
+                        id="detail-channel"
+                        type="text"
+                        value="1TV"
+                        readonly
+                      />
+                    </div>
+                    <div class="detail-item">
+                      <label for="detail-dept"
+                        >제작부서<span class="asterisk">*</span></label
+                      >
+                      <div class="custom-select">
+                        <select id="detail-dept">
+                          <option value="0">제작부서</option>
+                          <option value="1">제작부서</option>
+                          <option value="2">제작부서</option>
+                          <option value="3">제작부서</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="detail-item">
+                      <label for="detail-region"
+                        >지역<span class="asterisk">*</span></label
+                      >
+                      <div class="custom-select">
+                        <select id="detail-region">
+                          <option value="0">본사</option>
+                          <option value="1">강원지부</option>
+                          <option value="2">경기지부</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="detail-item">
+                      <label for="detail-program"
+                        >프로그램<span class="asterisk">*</span></label
+                      >
+                      <div class="input-search-wrap">
+                        <input
+                          type="text"
+                          placeholder="프로그램검색"
+                          aria-label="프로그램검색"
+                          class="input-search"
+                        />
+                      </div>
+                      <input
+                        id="detail-program"
+                        type="text"
+                        placeholder="입력내용표시"
+                      />
+                    </div>
+                    <div class="detail-item">
+                      <label for="detail-title"
+                        >예고명<span class="asterisk">*</span></label
+                      >
+                      <input
+                        id="detail-title"
+                        type="text"
+                        value="영화가 좋다"
+                      />
+                    </div>
+                    <div class="detail-item">
+                      <label for="detail-category"
+                        >구분<span class="asterisk">*</span></label
+                      >
+                      <div class="custom-select">
+                        <select id="detail-category">
+                          <option value="0">구분</option>
+                          <option value="1">구분</option>
+                          <option value="2">구분</option>
+                          <option value="3">구분</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="detail-item">
+                      <label id="detail-sponsor-yn-label"
+                        >협찬여부<span class="asterisk">*</span></label
+                      >
+                      <div
+                        role="radiogroup"
+                        aria-labelledby="detail-sponsor-yn-label"
+                      >
+                        <label class="radio-wrap"
+                          >있음
+                          <input type="radio" checked name="radio" />
+                          <span class="checkmark"></span>
+                        </label>
+                        <label class="radio-wrap"
+                          >없음
+                          <input type="radio" name="radio" />
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="detail-item">
+                      <label for="detail-meeting"
+                        >의결회의<span class="asterisk">*</span></label
+                      >
+                      <div class="input-search-wrap">
+                        <input
+                          id="detail-meeting"
+                          type="text"
+                          placeholder="의결회의검색"
+                          class="input-search"
+                        />
+                      </div>
+                    </div>
+                    <div class="detail-item">
+                      <label id="detail-meeting-count-label">회의지수</label>
+                      <input
+                        type="text"
+                        class="right"
+                        placeholder="년"
+                        aria-labelledby="detail-meeting-count-label"
+                        aria-label="년도"
+                      />
+                      <input
+                        type="number"
+                        min="0"
+                        max="100"
+                        placeholder="0"
+                        class="right"
+                        aria-labelledby="detail-meeting-count-label"
+                        aria-label="회의지수 값"
+                      />
+                    </div>
+                    <div class="divider"></div>
+                    <div class="detail-item">
+                      <label for="detail-sponsor-name"
+                        >협찬처<span class="asterisk">*</span></label
+                      >
+                      <div class="input-search-wrap">
+                        <input
+                          id="detail-sponsor-name"
+                          type="text"
+                          placeholder="의결회의검색"
+                          class="input-search"
+                        />
+                      </div>
+                    </div>
+                    <div class="detail-item">
+                      <label id="detail-period-label">약정기간</label>
+                      <div class="input-date-wrap">
+                        <input
+                          type="date"
+                          class="input-date"
+                          value="2026-01-01"
+                          aria-labelledby="detail-period-label"
+                          aria-label="시작일"
+                        />
+                        <span class="custom-calendar-icon"></span>
+                      </div>
+                      <div class="input-date-wrap">
+                        <input
+                          type="date"
+                          class="input-date"
+                          value="2026-01-31"
+                          aria-labelledby="detail-period-label"
+                          aria-label="종료일"
+                        />
+                        <span class="custom-calendar-icon"></span>
+                      </div>
+                    </div>
+                    <div class="detail-item">
+                      <label for="detail-spot-id"
+                        >SPOT ID<span class="asterisk">*</span></label
+                      >
+                      <input
+                        id="detail-spot-id"
+                        type="text"
+                        value="P2008-2156"
+                        readonly
+                      />
+                    </div>
+                    <div class="divider"></div>
+                    <div class="detail-item2">
+                      <label id="detail-commitment-count-label"
+                        >약정횟수<span class="asterisk">*</span></label
+                      >
+                      <div
+                        class="grid-wrap"
+                        role="table"
+                        aria-labelledby="detail-commitment-count-label"
+                      >
+                        <!-- 헤더 -->
+                        <div class="grid-header" role="row">
+                          <div class="col no" role="columnheader">채널명</div>
+                          <div class="col half" role="columnheader">SA</div>
+                          <div class="col half" role="columnheader">A</div>
+                          <div class="col half" role="columnheader">B</div>
+                          <div class="col half" role="columnheader">C</div>
+                          <div class="col half" role="columnheader">D</div>
+                          <div class="col full" role="columnheader">합계</div>
+                        </div>
+
+                        <div class="grid-body" role="rowgroup">
+                          <div class="grid-row" role="row">
+                            <div class="col no" role="cell">1TV</div>
+                            <div class="col half center" role="cell">0</div>
+                            <div class="col half center" role="cell">0</div>
+                            <div class="col half center" role="cell">0</div>
+                            <div class="col half center" role="cell">0</div>
+                            <div class="col half center" role="cell">0</div>
+                            <div class="col full center" role="cell">0</div>
+                          </div>
+                          <div class="grid-row" role="row">
+                            <div class="col no" role="cell">2TV</div>
+                            <div class="col half center" role="cell">0</div>
+                            <div class="col half center" role="cell">0</div>
+                            <div class="col half center" role="cell">0</div>
+                            <div class="col half center" role="cell">0</div>
+                            <div class="col half center" role="cell">0</div>
+                            <div class="col full center" role="cell">0</div>
+                          </div>
+                          <div class="grid-row" role="row">
+                            <div class="col no" role="cell">합계</div>
+                            <div class="col half center" role="cell">0</div>
+                            <div class="col half center" role="cell">0</div>
+                            <div class="col half center" role="cell">0</div>
+                            <div class="col half center" role="cell">0</div>
+                            <div class="col half center" role="cell">0</div>
+                            <div class="col full center" role="cell">0</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    id="tab2"
+                    role="tabpanel"
+                    aria-labelledby="tab2-btn"
+                    class="tab-content"
+                  >
+                    예고회차별 정보
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <svg style="display: none">
+      <symbol id="logo-kbs" viewBox="0 0 159 18">
+        <g clip-path="url(#clip0_1115_628)">
+          <path
+            d="M65.74 8.7575C65.73 8.4225 65.6975 8.08 65.6425 7.7375C65.6425 7.7325 65.6425 7.73 65.6425 7.7275C65.585 7.36 65.5 6.99 65.39 6.62C65.1775 5.9025 64.8675 5.1875 64.4575 4.5C63.2975 2.55 61.575 1.21 59.7825 0.6625C59.7825 0.6625 55.69 -0.7 53.48 1.545C53.44 1.5875 53.4025 1.63 53.3625 1.675C51.935 2.18 50.71 3.0325 49.825 4.115C49.1425 4.95 48.66 5.9225 48.445 6.975C48.4275 7.0625 48.3775 7.325 48.375 7.35C48.21 8.345 48.25 9.1675 48.25 9.1675C48.25 9.1975 48.25 9.2275 48.25 9.26C48.27 9.9725 48.385 10.705 48.6025 11.4375C48.815 12.155 49.125 12.87 49.535 13.5575C50.695 15.505 52.4175 16.8475 54.21 17.395C54.21 17.395 58.3025 18.7575 60.5125 16.5125C60.5525 16.47 60.59 16.425 60.63 16.3825C62.0575 15.8775 63.2825 15.025 64.1675 13.9425C64.5775 13.4425 64.9125 12.8925 65.1625 12.3075C65.71 11.0675 65.78 9.705 65.74 8.7625V8.7575ZM52.8425 2.46C53.5525 2.1275 54.3475 1.87 55.2275 1.6975C56.555 1.43 57.8425 1.39 59.0275 1.545C61.64 1.89 63.765 3.2025 64.77 5.2C64.7775 5.2175 64.7875 5.2325 64.795 5.25C64.8025 5.275 64.795 5.2925 64.7825 5.3C64.765 5.31 64.7375 5.305 64.7175 5.28C64.7075 5.2625 64.6975 5.2475 64.6875 5.23C63.8675 3.9425 62.555 2.9625 60.945 2.3975C59.3225 1.825 57.3975 1.67 55.3725 2.0375C54.3525 2.215 53.4475 2.515 52.6525 2.9075C52.705 2.755 52.7675 2.605 52.8375 2.46H52.8425ZM52.47 3.9525C53.2875 3.58 54.1625 3.2725 55.085 3.0475C58.0575 2.31 60.7275 2.6725 62.6475 3.7725C63.9825 4.5375 64.955 5.655 65.4175 7.0075C65.425 7.025 65.43 7.045 65.4375 7.0625C65.4375 7.0625 65.4375 7.065 65.4375 7.0675C65.4575 7.135 65.4325 7.16 65.4075 7.1625C65.395 7.1625 65.3775 7.1575 65.37 7.1425C65.3625 7.1275 65.3575 7.1125 65.3525 7.0975C64.9325 6.085 64.2175 5.22 63.28 4.555C61.32 3.17 58.38 2.66 55.0775 3.52C54.17 3.7675 53.3075 4.09 52.5 4.47C52.495 4.435 52.49 4.4025 52.4875 4.3675C52.4725 4.2275 52.47 4.09 52.4725 3.9525H52.47ZM61.1525 15.5875C60.4425 15.92 59.6475 16.1775 58.7675 16.3475C57.4375 16.615 56.1525 16.6575 54.9675 16.5C52.355 16.155 50.23 14.845 49.225 12.845C49.2175 12.8275 49.2075 12.8125 49.2 12.795C49.19 12.7725 49.2 12.7525 49.2125 12.745C49.23 12.735 49.2575 12.74 49.2775 12.765C49.2875 12.7825 49.2975 12.7975 49.3075 12.815C50.1275 14.1025 51.44 15.08 53.05 15.6475C54.6725 16.22 56.5975 16.375 58.6225 16.005C59.6425 15.8275 60.5475 15.53 61.3425 15.1375C61.29 15.29 61.2275 15.44 61.155 15.585L61.1525 15.5875ZM61.5275 14.0975C60.71 14.47 59.835 14.7775 58.9125 15.0025C55.94 15.74 53.27 15.3775 51.35 14.2775C50.0175 13.515 49.0425 12.395 48.58 11.0425C48.575 11.025 48.5675 11.005 48.56 10.9875V10.9825C48.54 10.915 48.565 10.89 48.59 10.8875C48.6025 10.8875 48.6175 10.895 48.6275 10.9075C48.6325 10.9225 48.64 10.9375 48.645 10.9525C49.065 11.965 49.78 12.83 50.7175 13.495C52.6775 14.88 55.6175 15.39 58.92 14.53C59.8275 14.2825 60.69 13.96 61.4975 13.58C61.5025 13.615 61.5075 13.6475 61.51 13.6825C61.5225 13.8225 61.5275 13.96 61.525 14.0975H61.5275ZM65.6175 8.935C65.605 8.935 65.5925 8.925 65.5825 8.9075C65.58 8.8925 65.575 8.88 65.5725 8.8675C65.345 7.9625 64.8725 7.1725 64.215 6.52C62.33 4.6475 58.9175 3.9 55.3175 4.7725C55.0425 4.84 54.775 4.9175 54.5125 5.0025C53.9425 5.185 53.4 5.4025 52.885 5.6525C52.995 5.8575 53.125 6.0475 53.2725 6.225C54.3425 5.7175 55.55 5.3525 56.8125 5.185C57.6575 5.0725 58.485 5.06 59.275 5.1325C61.41 5.33 63.2675 6.165 64.4 7.425C65.1275 8.2325 65.5575 9.2175 65.57 10.32C65.57 10.35 65.57 10.38 65.57 10.4125C65.57 10.44 65.57 10.4675 65.57 10.495C65.565 10.535 65.5375 10.5425 65.515 10.54C65.5 10.54 65.4825 10.53 65.4775 10.515C65.475 10.4875 65.47 10.4625 65.4675 10.435C65.3475 9.5575 64.995 8.7725 64.4525 8.1025C63.74 7.22 62.7 6.5425 61.445 6.1325C59.95 5.6425 58.1475 5.5325 56.2175 5.905C55.33 6.0725 54.48 6.3275 53.6975 6.655C53.905 6.8325 54.135 6.99 54.38 7.12C55.2675 6.7275 56.275 6.4525 57.3675 6.3425C59.5375 6.1225 61.5725 6.5775 63.03 7.49C63.5925 7.84 64.0675 8.26 64.4325 8.735C64.9325 9.385 65.22 10.1375 65.2325 10.9625C65.24 11.4225 65.1625 11.8725 65.01 12.3025C65.005 12.3175 64.9975 12.3325 64.9925 12.3475C64.98 12.365 64.965 12.375 64.9525 12.3725C64.9375 12.3675 64.93 12.35 64.93 12.325C64.935 12.31 64.9375 12.295 64.94 12.28C65.015 11.935 65.04 11.58 65.0125 11.22C64.9575 10.5525 64.7225 9.94 64.3425 9.395C64.26 9.28 64.1725 9.1675 64.08 9.0575C62.68 7.4275 59.9 6.5725 56.98 7.1175C56.4275 7.2075 55.9 7.335 55.4 7.4975C55.855 7.5975 56.34 7.6225 56.8325 7.5575C56.8325 7.5575 57.6275 7.4525 57.9575 7.3825C58.0225 7.3725 58.125 7.3575 58.1725 7.355H58.195C58.665 7.3075 60.1175 7.2275 61.6375 7.7725C61.6375 7.7725 63.3425 8.35 64.0875 9.645C64.0875 9.645 64.255 9.8825 64.01 10.215C63.785 10.505 63.535 10.78 63.265 11.0375C63.0025 11.2775 62.545 11.6 62.545 11.6C62.13 11.8775 61.6875 12.135 61.2225 12.3675V12.36C61.185 12.3775 61.15 12.3925 61.115 12.41C61.115 12.41 61.1175 12.415 61.12 12.4175C61.1375 12.45 61.155 12.4825 61.17 12.515C61.225 12.6275 61.275 12.7425 61.32 12.8625C60.5375 13.2375 59.69 13.5425 58.79 13.7625C55.2975 14.635 51.995 14.025 50.06 12.32C49.15 11.5175 48.5425 10.4725 48.3625 9.225C48.36 9.205 48.3575 9.185 48.355 9.1625C48.355 9.1325 48.3675 9.125 48.3825 9.1225C48.395 9.1225 48.4075 9.1325 48.4175 9.15C48.42 9.165 48.425 9.1775 48.4275 9.19C48.655 10.095 49.1275 10.885 49.785 11.5375C51.67 13.41 55.0825 14.1575 58.685 13.285C58.9575 13.2175 59.2275 13.14 59.49 13.055C60.06 12.8725 60.6025 12.655 61.1175 12.405C61.0075 12.2 60.875 12.01 60.7275 11.8325C59.6575 12.34 58.45 12.705 57.1875 12.8725C56.3425 12.985 55.515 13 54.725 12.925C52.59 12.7275 50.7325 11.8925 49.6 10.6325C48.8725 9.825 48.4425 8.84 48.43 7.7375C48.43 7.7075 48.43 7.6775 48.43 7.6475C48.43 7.62 48.43 7.5925 48.43 7.565C48.435 7.525 48.4625 7.5175 48.485 7.52C48.5 7.52 48.5175 7.53 48.5225 7.545C48.525 7.5725 48.53 7.5975 48.5325 7.625C48.6525 8.5025 49.005 9.2875 49.5475 9.9575C50.26 10.84 51.3 11.5175 52.555 11.9275C54.05 12.4175 55.8525 12.5275 57.78 12.1525C58.6675 11.985 59.5175 11.73 60.3025 11.4025C60.095 11.225 59.865 11.0675 59.62 10.9375C58.7325 11.33 57.725 11.605 56.6325 11.715C54.4625 11.935 52.4275 11.48 50.97 10.57C50.4075 10.2175 49.93 9.8 49.5675 9.325C49.0675 8.675 48.7775 7.9225 48.7675 7.0975C48.76 6.6375 48.8375 6.1875 48.99 5.7575C48.995 5.7425 49.0025 5.7275 49.0075 5.7125C49.02 5.695 49.0325 5.685 49.0475 5.6875C49.0625 5.6925 49.07 5.71 49.07 5.735C49.0675 5.75 49.0625 5.765 49.06 5.78C48.985 6.125 48.9575 6.48 48.9875 6.84C49.0425 7.5075 49.28 8.12 49.66 8.6625C49.74 8.78 49.8275 8.8925 49.9225 9C51.3225 10.63 54.1025 11.485 57.0225 10.94C57.575 10.8525 58.1025 10.7225 58.6025 10.56C58.145 10.46 57.6625 10.4375 57.17 10.5C57.17 10.5 56.375 10.605 56.045 10.675C55.98 10.685 55.8775 10.7025 55.83 10.7025H55.8075C55.3375 10.75 53.885 10.83 52.365 10.285C52.365 10.285 50.66 9.7075 49.915 8.4125C49.915 8.4125 49.7475 8.175 49.9925 7.8425C50.2175 7.5525 50.4675 7.2775 50.7375 7.02C51 6.78 51.455 6.4575 51.455 6.4575C51.87 6.18 52.3125 5.9225 52.7775 5.69V5.6975C52.815 5.68 52.85 5.665 52.885 5.6475C52.885 5.6475 52.8825 5.6425 52.88 5.64C52.8625 5.6075 52.845 5.575 52.83 5.5425C52.775 5.43 52.725 5.315 52.6825 5.195C53.465 4.82 54.3125 4.515 55.2125 4.295C58.7025 3.4225 62.0075 4.0325 63.9425 5.7375C64.8525 6.54 65.46 7.585 65.6425 8.8325C65.645 8.8525 65.6475 8.8725 65.65 8.895C65.65 8.9275 65.6375 8.9325 65.6225 8.935H65.6175Z"
+            fill="var(--color-logo-color01)"
+          />
+        </g>
+        <g clip-path="url(#clip1_1115_628)">
+          <path
+            d="M14.0918 16.9147L7.66037 8.78667L13.8582 1.26667H9.49185L3.59129 8.70933V1.26667H0.26543V16.9147H3.59129V8.86933L9.37241 16.9147H14.0918Z"
+            fill="var(--color-logo-color01)"
+          />
+          <path
+            d="M37.6648 7.38933C38.6283 7.38933 42.7346 8.01067 42.7346 12.112C42.7346 16.448 38.5938 16.9173 38.5938 16.9173H28.9082V14.3813L36.6986 14.3867C38.9575 14.3867 38.9362 12.2213 38.9362 12.2213C38.9362 9.848 36.266 9.944 36.266 9.944H33.2825C31.9129 9.944 28.3827 9.448 28.3827 5.78133C28.3827 1.376 32.7596 1.26667 32.7596 1.26667H41.6251V3.768L34.3469 3.77333C31.9952 3.77333 32.0324 5.608 32.0324 5.608C32.0324 5.608 32.0536 7.39733 34.0894 7.39733L37.6622 7.38933H37.6648Z"
+            fill="var(--color-logo-color01)"
+          />
+          <path
+            d="M23.7588 16.9147C26.0999 16.9147 28.2287 15.192 28.2287 12.544C28.2287 9.52 26.0044 8.57867 26.0044 8.57867C26.0044 8.57867 27.7695 7.968 27.6049 5.25867C27.366 1.33067 22.9493 1.26667 22.9493 1.26667H14.3838V16.9067C14.3838 16.9067 21.7867 16.9147 23.7588 16.9147ZM17.5291 3.80533H21.8185C21.8185 3.80533 24.149 3.70133 24.149 5.64533C24.149 7.32 22.6838 7.42933 22.2087 7.46133H17.5291V3.80533ZM21.4363 14.368H17.5291V9.968H22.3494C22.3494 9.968 24.786 10.0587 24.786 12.1413C24.786 14.224 22.9599 14.368 21.4363 14.368Z"
+            fill="var(--color-logo-color01)"
+          />
+        </g>
+        <path
+          d="M80.7552 3.625H76.8281V15.625H73.9648V3.625H70.0376V2.005H80.7552V3.625Z"
+          fill="var(--color-logo-color03)"
+        />
+        <path
+          d="M83.8943 2.005L87.3487 13.795L90.803 2.005H93.1803L89.2925 15.625H86.4293C86.1009 15.625 85.8119 15.52 85.5755 15.325C85.326 15.115 85.1552 14.845 85.0501 14.485L81.4907 2.005H83.9206H83.8943Z"
+          fill="var(--color-logo-color03)"
+        />
+        <path
+          d="M100.404 8.65V6.13H103.307V8.65H108.679V10.015H94.3624V8.65H100.404ZM105.697 10.81C106.512 10.81 107.142 11.02 107.576 11.455C108.009 11.875 108.219 12.505 108.219 13.33C108.219 14.155 108.009 14.785 107.576 15.205C107.142 15.625 106.525 15.85 105.697 15.85H97.3439C96.5295 15.85 95.8991 15.64 95.4657 15.205C95.0322 14.77 94.8221 14.155 94.8221 13.33C94.8221 12.505 95.0322 11.875 95.4657 11.455C95.8991 11.035 96.5164 10.81 97.3439 10.81H105.697ZM97.2257 3.445C97.4489 2.995 97.6985 2.665 98.0006 2.47C98.2895 2.275 98.6573 2.185 99.1039 2.185H107.983V7.87H104.962V3.55H100.956C100.509 3.55 100.194 3.73 100.01 4.105L98.1451 7.87H95.0585L97.2388 3.445H97.2257ZM97.8167 13.435C97.8167 14.155 98.1319 14.515 98.7624 14.515H104.292C104.922 14.515 105.238 14.155 105.238 13.435V13.225C105.238 12.505 104.922 12.145 104.292 12.145H98.7624C98.1319 12.145 97.8167 12.505 97.8167 13.225V13.435Z"
+          fill="var(--color-logo-color03)"
+        />
+        <path
+          d="M124.44 8.185V9.55H118.819V10.435H123.599V13.6H113.88V14.335H123.639V15.76H111.962C111.332 15.76 111.017 15.4 111.017 14.68V12.4H120.736V11.74H110.964V10.45H115.929V9.565H110.15V8.2H124.466L124.44 8.185ZM110.767 2.755H115.955V1.57H118.7V2.755H124.296V4.135H123.1V7.36H120.079V4.135H116.901C116.573 4.135 116.31 4.225 116.087 4.39C115.876 4.555 115.679 4.795 115.496 5.11L114.235 7.36H111.148L112.816 4.135H110.78V2.755H110.767Z"
+          fill="var(--color-logo-color03)"
+        />
+        <path
+          d="M140.201 9.475V10.84H134.869V13.12H131.966V10.84H125.885V9.475H140.201ZM126.489 5.065C126.489 4.075 126.712 3.31 127.172 2.785C127.632 2.26 128.288 2.005 129.168 2.005H137.207C138.073 2.005 138.743 2.26 139.203 2.785C139.663 3.31 139.886 4.06 139.886 5.065V5.665C139.886 6.655 139.663 7.42 139.203 7.945C138.743 8.47 138.087 8.725 137.207 8.725H129.168C128.301 8.725 127.632 8.47 127.172 7.945C126.712 7.42 126.489 6.67 126.489 5.665V5.065ZM126.673 11.755H129.536V14.395H139.597V15.76H127.619C126.988 15.76 126.673 15.4 126.673 14.68V11.74V11.755ZM129.379 6.355C129.379 7.075 129.694 7.435 130.324 7.435H136.051C136.681 7.435 136.996 7.075 136.996 6.355V4.39C136.996 3.67 136.681 3.31 136.051 3.31H130.324C129.694 3.31 129.379 3.67 129.379 4.39V6.355Z"
+          fill="var(--color-logo-color03)"
+        />
+        <path
+          d="M141.699 2.485H144.05V1.375H146.913V2.485H149.264V3.865H141.699V2.485ZM141.738 13.33C141.738 12.505 141.948 11.875 142.382 11.455C142.815 11.035 143.432 10.81 144.26 10.81H153.769C154.583 10.81 155.214 11.02 155.647 11.455C156.081 11.875 156.291 12.505 156.291 13.33C156.291 14.155 156.081 14.785 155.647 15.205C155.214 15.625 154.596 15.85 153.769 15.85H144.26C143.445 15.85 142.815 15.64 142.382 15.205C141.948 14.77 141.738 14.155 141.738 13.33ZM141.817 6.64C141.817 5.995 142.001 5.47 142.355 5.05C142.71 4.645 143.17 4.435 143.747 4.435H147.215C147.78 4.435 148.239 4.645 148.607 5.05C148.962 5.455 149.146 5.98 149.146 6.64V7.795C149.146 8.44 148.962 8.965 148.607 9.385C148.253 9.79 147.793 10 147.215 10H143.747C143.183 10 142.723 9.79 142.355 9.385C142.001 8.98 141.817 8.455 141.817 7.795V6.64ZM144.417 7.765C144.417 8.035 144.496 8.245 144.641 8.425C144.798 8.605 144.982 8.68 145.219 8.68H145.744C145.98 8.68 146.164 8.59 146.322 8.425C146.479 8.245 146.545 8.035 146.545 7.765V6.655C146.545 6.385 146.466 6.175 146.322 5.995C146.164 5.815 145.98 5.74 145.744 5.74H145.219C144.982 5.74 144.798 5.83 144.641 5.995C144.483 6.175 144.417 6.385 144.417 6.655V7.765ZM145.744 12.145C145.113 12.145 144.798 12.505 144.798 13.225V13.435C144.798 14.155 145.113 14.515 145.744 14.515H152.272C152.902 14.515 153.217 14.155 153.217 13.435V13.225C153.217 12.505 152.902 12.145 152.272 12.145H145.744ZM149.934 2.005H152.521V5.545H153.493V2.005H156.159V9.985H153.493V7.015H152.521V9.985H149.934V2.005Z"
+          fill="var(--color-logo-color03)"
+        />
+      </symbol>
+      <defs>
+        <clipPath id="clip0_1115_628">
+          <rect width="18" height="18" fill="white" transform="translate(48)" />
+        </clipPath>
+        <clipPath id="clip1_1115_628">
+          <rect
+            width="43"
+            height="16"
+            fill="white"
+            transform="translate(0 1)"
+          />
+        </clipPath>
+      </defs>
+    </svg>
+  </body>
+</html>

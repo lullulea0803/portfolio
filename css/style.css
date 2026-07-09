@@ -40,7 +40,7 @@ body {
    DarkMode
 ========================= */
 body.dark {
-  --primary: #2cd369;
+  --primary: rgb(44, 211, 105);
   --primaryRgb: 44, 211, 105;
   --secondary: black;
   --positive: yellowgreen;
@@ -505,7 +505,35 @@ nav {
 .container h1 span {
   font-weight: 700;
 }
-
+.title-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+.title-wrap button {
+  border: none;
+  background-color: white;
+  padding: 0 40px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.08);
+}
+.title-wrap button:hover {
+  border: none;
+  background-color: white;
+  padding: 0 40px;
+  height: 50px;
+  line-height: 54px;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 0 16px rgba(44, 211, 105, 0.4);
+}
+.title-wrap .btn-wrap {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
 .cover {
   margin-bottom: 40px;
 }
